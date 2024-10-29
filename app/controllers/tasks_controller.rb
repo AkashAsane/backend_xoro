@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [ :update, :destroy ]
+  before_action :set_task, only: [  :update, :destroy ]
 
-
+  # GET
   def index
     @tasks = Task.all
     render json: @tasks
   end
 
-
+  # POST
   def create
     @task = Task.new(task_params)
     if @task.save
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     end
   end
 
-
+  # PUT
   def update
     if @task.update(task_params)
       render json: @task
@@ -25,6 +25,8 @@ class TasksController < ApplicationController
       render json: @task.errors, status: :unprocessable_entity
     end
   end
+
+  # DELETE
   def destroy
     @task.destroy
     head :no_content
